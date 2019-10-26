@@ -4,8 +4,32 @@
   "description": "Login-as-a-Service",
   "author": "Tom Söderlund",
   "license": "MIT",
+  "scripts": {
+    "test": "echo 'Running Standard.js and Jasmine unit tests...\n' && yarn lint && yarn unit",
+    "lint": "standard",
+    "fix": "standard --fix",
+    "unit": "jasmine"
+  },
+  "standard": {
+    "ignore": [
+      ".next"
+    ],
+    "globals": [
+      "beforeAll",
+      "beforeEach",
+      "describe",
+      "expect",
+      "it",
+      "jasmine",
+      "spyOn"
+    ]
+  },
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "pg": "^7.12.1",
     "sql-wizard": "^1.1.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
   }
 }

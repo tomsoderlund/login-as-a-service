@@ -1,0 +1,10 @@
+{
+  "name": "login-as-a-service",
+  "version": 2,
+  "alias": ["login-as-a-service"],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  },
+  "regions": ["arn1"],
+  "public": false
+}
