@@ -1432,9 +1432,9 @@ sprintf-js@~1.0.2:
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
 sql-wizard@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/sql-wizard/-/sql-wizard-1.1.2.tgz#523afd5d98d265eb733f9b52aec263f75e0f9265"
-  integrity sha512-Um1z/2U0jLDCx4sw6pioMOgiUA7I4hIb+kTdmpiPlJnNyoDTWNz4pHYLmgApzUSntpq5hLes+cP71Dy3u2Kgqg==
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/sql-wizard/-/sql-wizard-1.1.4.tgz#924edf8e67b950849347d72c20d230d09756c64b"
+  integrity sha512-+4W+2ww35gpVd0Z36fwowmY6oPc3EKX7SifoMyPy/ah+5pxetItfdGwKaze33dtQuGdINn+HfCY+v2vnoK+meg==
 
 standard-engine@^12.0.0:
   version "12.0.0"

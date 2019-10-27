@@ -3,7 +3,7 @@
   "version": 2,
   "alias": ["login-as-a-service"],
   "env": {
-    "DATABASE_URL": "@database_url"
+    "DATABASE_URL": "@login-as-a-service_database_url"
   },
   "regions": ["arn1"],
   "public": false
