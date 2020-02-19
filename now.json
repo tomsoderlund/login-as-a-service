@@ -1,10 +1,9 @@
 {
-  "name": "login-as-a-service",
   "version": 2,
-  "alias": ["login-as-a-service"],
   "env": {
     "DATABASE_URL": "@login-as-a-service_database_url",
-    "MAILGUN_KEY": "@login-as-a-service_mailgun_key"
+    "MAILGUN_KEY": "@login-as-a-service_mailgun_key",
+    "WEBHOOK": "@login-as-a-service_webhook"
   },
   "regions": ["arn1"],
   "public": false
