@@ -2,7 +2,7 @@
 
 ## How to use (signup flow)
 
-1. Set up your `app` in the database. Point `redirect_url` to the page to process logins.
+1. Set up your `app` in the database. Point `redirect_url` to the page to process logins (e.g. `https://myapp.com/authenticate`).
 2. Create a client-side form.
 3. Submit `POST /api/[app]/login` (or `lead` or `signup` – see “Login/Signup/Lead” below), with body of at least `{ email }`.
 4. An email is sent to the user, when link is clicked they are forwarded to `redirect_url` page with query `?token=` (a JWT token).
