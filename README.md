@@ -1,5 +1,12 @@
 # Login-as-a-Service
 
+## Features
+
+- Sign up/Login via email (no password)
+- Lead collection
+- Invites (coming)
+- SMS support (coming)
+
 ## How to use (signup flow)
 
 1. Set up your `app` in the database. Point `redirect_url` to the page to process logins (e.g. `https://myapp.com/authenticate`).
