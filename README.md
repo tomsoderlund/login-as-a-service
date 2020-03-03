@@ -2,7 +2,7 @@
 
 ## Features
 
-- Sign up/Login via email (no password)
+- Sign up/Login via “magic link” email (no password)
 - Lead collection
 - Invites (coming)
 - SMS support (coming)
