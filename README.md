@@ -32,7 +32,7 @@
 
 ## How to Start
 
-    now dev --listen 3102
+    yarn now
 
 
 ## API
