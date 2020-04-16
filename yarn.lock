@@ -1830,10 +1830,10 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
-sql-wizard@^1.1.0:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/sql-wizard/-/sql-wizard-1.1.4.tgz#924edf8e67b950849347d72c20d230d09756c64b"
-  integrity sha512-+4W+2ww35gpVd0Z36fwowmY6oPc3EKX7SifoMyPy/ah+5pxetItfdGwKaze33dtQuGdINn+HfCY+v2vnoK+meg==
+sql-wizard@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/sql-wizard/-/sql-wizard-1.3.1.tgz#59e0bc4c3305b079060e0c163cec57385021e104"
+  integrity sha512-TKS8y0gobLD16RL3lPGmQWDLlrGSauDqH+pJbE3RGR6ZJZPCr5VMvsWSpfJG3k4KxmRbKKM995YW06/68hyMnw==
 
 standard-engine@^12.0.0:
   version "12.0.0"
