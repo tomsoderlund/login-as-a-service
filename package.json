@@ -29,7 +29,7 @@
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
     "mailgun-js": "^0.22.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "pg": "^7.12.1",
     "sql-wizard": "^1.3.1"
   },
