@@ -5,6 +5,7 @@
   "author": "Tom Söderlund",
   "license": "MIT",
   "scripts": {
+    "dev": "yarn now",
     "now": "now dev --listen 3102",
     "deploy": "now --prod",
     "test": "echo 'Running Standard.js and Jasmine unit tests...\n' && yarn lint && yarn unit",
