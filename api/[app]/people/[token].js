@@ -1,3 +1,3 @@
-const { getOrUpdatePerson } = require('../../../lib/people')
+const { getOrUpdatePerson } = require('../../../lib/data/people')
 
 module.exports = getOrUpdatePerson
