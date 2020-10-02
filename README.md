@@ -11,10 +11,11 @@
 
 1. Set up your `app` in the database. Point `redirect_url` to the page to process logins (e.g. `https://myapp.com/authenticate`).
 2. Create a client-side form.
-3. Submit `POST /api/[app]/login` (or `lead` or `signup` – see “Login/Signup/Lead” below), with body of at least `{ email }`.
-4. An email is sent to the user, when link is clicked they are forwarded to `redirect_url` page with query `?token=` (a JWT token).
-5. Fetch `GET /api/[app]/people/[token]` to get the User object.
-6. Store at least `token` in a cookie/local storage.
+3. Set up Mailgun for email (see below).
+4. Submit `POST /api/[app]/login` (or `lead` or `signup` – see “Login/Signup/Lead” below), with body of at least `{ email }`.
+5. An email is sent to the user, when link is clicked they are forwarded to `redirect_url` page with query `?token=` (a JWT token).
+6. Fetch `GET /api/[app]/people/[token]` to get the User object.
+7. Store at least `token` in a cookie/local storage.
 
 ### Example client-side code of steps 5-6
 
@@ -28,6 +29,12 @@
       },
       [])
     }
+
+### Mailgun setup
+
+https://app.mailgun.com/app/sending/domains/mg.MYDOMAIN.com
+
+![Mailgun setup](docs/mailgun_setup.png)
 
 
 ## How to Start
