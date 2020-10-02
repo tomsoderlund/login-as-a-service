@@ -17,17 +17,49 @@
 6. Fetch `GET /api/[app]/people/[token]` to get the User object.
 7. Store at least `token` in a cookie/local storage.
 
-### Example client-side code of steps 5-6
+### Example client-side code
 
-    export const useLoginUser = () => {
-      return React.useCallback(async (token) => {
+A React Hook implementing steps 4 (`loginUser`) and 6-7 (`authenticateUser`):
+
+    export const useUser = function () {
+      const [user, setUser] = useState()
+
+      useEffect(() => {
+        const user = getCookie(COOKIE_NAME) ? JSON.parse(getCookie(COOKIE_NAME)) : undefined
+        console.log(`User:`, user)
+        setUser(user)
+      }, [])
+
+      const loginUser = async (personInfo) => {
+        const result = await fetch(`${config.loginService}/signup`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(personInfo)
+        })
+        if (result.status === 200) {
+          googleEvent('user_signup')
+          return true
+        } else {
+          console.warn({ result })
+          const json = await result.json()
+          throw new Error(`Login error: ${json.message}`)
+        }
+      }
+
+      const authenticateUser = async (token) => {
         if (!token) return
         const person = await fetch(`${config.loginService}/people/${token}`).then(res => res.json())
         const { username } = person
-        saveCookie({ username, token })
+        if (!username) throw new Error(`Could not log in user – user token is invalid`)
+        const userObj = { username, token }
+        if (isClientSide()) setCookie(COOKIE_NAME, userObj)
         return person
-      },
-      [])
+      }
+
+      return { user, loginUser, authenticateUser }
     }
 
 ### Mailgun setup
