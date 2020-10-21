@@ -91,6 +91,8 @@ JSON fields:
 - `country` (code)
 - `...metadata` for everything else
 
-### Get user info
+### Get user info and statistics
 
 - `GET /api/[app]/people/[token]`: get user info from a JWT token.
+- `GET /api/apps/[app-secret]/people`: get user list with email address.
+- `GET /api/stats`: see user count etc for every app.
