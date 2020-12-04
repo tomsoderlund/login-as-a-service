@@ -109,6 +109,7 @@ JSON fields:
 
 ## Todo
 
+- [ ] 🐜 duplicate key value violates unique constraint \"app_username_unique_idx\"
 - [ ] Fallback email account when not specified on app level
 - [ ] Subscriptions
   - [ ] Send email/SMS to all subscribers
