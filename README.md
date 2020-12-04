@@ -88,7 +88,7 @@ https://app.mailgun.com/app/sending/domains/mg.MYDOMAIN.com
 
 - `POST /api/[app]/lead`: Create new lead (create new user if it doesn’t exist, don’t send email)
 - `POST /api/[app]/signup`: Create new user (create new user if it doesn’t exist, send login email)
-- `POST /api/[app]/signup-direct`: Create new user without email verification (create new user only if it doesn’t exist – otherwise treat as `login`, include JWT `token` in response)
+- `POST /api/[app]/signup-direct`: Create new user without email verification (create new user only if it doesn’t exist – otherwise treat as `login`, respond with `person` object including JWT `token`)
 - `POST /api/[app]/login`: Login existing user (don’t create new user, send login email)
 
 JSON fields:
