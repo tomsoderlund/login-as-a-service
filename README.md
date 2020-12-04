@@ -102,7 +102,21 @@ JSON fields:
 
 ### Get user info and statistics
 
-- `GET /api/[app]/people/[token]`: get user info from a JWT token.
+- `GET /api/[app]/people/[token]`: get user info from a JWT token:
+
+    {
+      "user_id_numeric": 123,
+      "user_id": "e93fc8605c0940a0af6ce0fdb22f2e5c",
+      "username": "tomsoderlund",
+      "email": "tomsoderlund@email.com",
+      "first_name": "Tom",
+      "last_name": null,
+      "country": null,
+      "can_login": true,
+      "subscribe_email": true,
+      "subscribe_sms": true
+    }
+
 - `GET /api/apps/[app-secret]/people`: get user list with email address.
 - `GET /api/stats`: see user count etc for every app.
 
