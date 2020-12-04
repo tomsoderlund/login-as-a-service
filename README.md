@@ -15,7 +15,7 @@ _Simple plug-and-play login/signup/leads service (using email), compatible with 
 ### How to set up a new App
 
 1. Set up your `app` in the database. Point `redirect_url` to the page to process logins (e.g. `https://myapp.com/authenticate`).
-2. Set up Mailgun for email (see below).
+2. Set up Mailgun for email (see below). Place Mailgun values for domain, API key, (server) in database `app` or as global fallback values `DEFAULT_EMAIL_*`.
 3. Create a client-side login/signup form in your app code.
 
 ### How to log in (or signup) a user
@@ -110,7 +110,6 @@ JSON fields:
 ## Todo
 
 - [ ] 🐜 duplicate key value violates unique constraint \"app_username_unique_idx\"
-- [ ] Fallback email account when not specified on app level
 - [ ] Subscriptions
   - [ ] Send email/SMS to all subscribers
   - [ ] Subscribed (field in person_app)
@@ -129,6 +128,7 @@ Maybe:
 
 Done:
 
+- [x] Fallback email account when not specified on app level
 - [x] Inverted flow (`signup-direct`): sign up, email if NOT user
 - [x] 🐜 Email force lowercase
 - [x] 🐜 Usernames: when only numeric not NULL
