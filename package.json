@@ -1,7 +1,7 @@
 {
   "name": "login-as-a-service",
-  "version": "1.0.0",
-  "description": "Login-as-a-Service",
+  "version": "1.1.0",
+  "description": "Simple plug-and-play login/signup/leads service (using email), compatible with Vercel serverless functions",
   "author": "Tom Söderlund",
   "license": "MIT",
   "scripts": {
