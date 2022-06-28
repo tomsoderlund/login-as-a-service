@@ -11,7 +11,7 @@ module.exports = async (req, res) => handleRequest(async (req, res) => runDataba
     {
       fields: ['slug', 'name', 'count(person.id) as signups'],
       join: ['person_app', 'person'],
-      group: 'name',
+      group: 'slug, name',
       sort: 'signups desc'
     }
   )
