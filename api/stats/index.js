@@ -9,11 +9,15 @@ module.exports = async (req, res) => handleRequest(async (req, res) => runDataba
     'app',
     undefined,
     {
-      fields: ['name', 'count(person.id) as people'],
+      fields: ['slug', 'name', 'count(person.id) as signups'],
       join: ['person_app', 'person'],
       group: 'name',
       sort: 'people desc'
     }
   )
-  res.json(apps)
+  const appsGroupedBySlug = apps.reduce((result, app) => ({
+    ...result,
+    [app.slug]: app
+  }), {})
+  res.json(appsGroupedBySlug)
 }), { req, res })
