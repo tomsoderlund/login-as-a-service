@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "DATABASE_URL": "@login-as-a-service_database_url",
-    "WEBHOOK": "@login-as-a-service_webhook"
-  },
   "regions": ["arn1"],
   "public": false
 }
