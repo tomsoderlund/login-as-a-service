@@ -15,9 +15,9 @@ module.exports = async (req, res) => handleRequest(async (req, res) => runDataba
       sort: 'signups desc'
     }
   )
-  const appsGroupedBySlug = apps.reduce((result, app) => ({
-    ...result,
-    [app.slug]: app
-  }), {})
-  res.json(appsGroupedBySlug)
+  // const appsGroupedBySlug = apps.reduce((result, app) => ({
+  //   ...result,
+  //   [app.slug]: app
+  // }), {})
+  res.json(apps)
 }), { req, res })
