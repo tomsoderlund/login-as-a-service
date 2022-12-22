@@ -28,7 +28,7 @@
     ]
   },
   "dependencies": {
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mailgun-js": "^0.22.0",
     "node-fetch": "^2.6.0",
     "pg": "^7.12.1",
