@@ -123,6 +123,7 @@ JSON fields:
 
 ## Todo
 
+- [ ] Support multiple apps per user
 - [ ] 🐜 duplicate key value violates unique constraint \"app_username_unique_idx\"
 - [ ] Subscriptions
   - [ ] Send email/SMS to all subscribers
