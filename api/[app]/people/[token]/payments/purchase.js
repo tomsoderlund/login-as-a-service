@@ -26,8 +26,8 @@ export default async function handler (req, res) {
       if (!user_id) throw new Error('Invalid login token:401') // eslint-disable-line camelcase
 
       // For each method
+      setAccessControlHeaders(res)
       if (req.method === 'OPTIONS') {
-        setAccessControlHeaders(res)
         res.status(200).end()
       } else if (req.method === 'POST') {
         const session = await createStripeSession('payment', undefined, req, [
