@@ -12,6 +12,7 @@ CREATE TABLE app (
   email_api_server character varying(50)
   -- Stripe payments: credits
   credits_price integer,
+  credits_start integer, -- credits given to new users
   currency character varying(3)
 );
 
