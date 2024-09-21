@@ -120,6 +120,13 @@ JSON fields:
 - `GET /api/apps/[app-secret]/people`: get user list with email address.
 - `GET /api/stats`: see user count etc for every app.
 
+### Payments with Stripe
+
+http://localhost:3102/test-payments.html
+
+- `POST /api/[app]/payments/purchase`: Create a one-time purchase: `{ amount = 500, currency = 'usd', productName = 'Product', quantity = 1, successUrl = '[ORIGIN]/success', cancelUrl = '[ORIGIN]/cancel' }`
+- `POST /api/[app]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe): `{ priceId, quantity = 1 }`
+
 
 ## Todo
 

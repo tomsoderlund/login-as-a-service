@@ -1,0 +1,108 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+<title>Test Payments</title>
+<meta charSet="utf-8"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600i&display=swap"/>
+<style type="text/css">
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/* darkturquoise/rebeccapurple/salmon/whitesmoke/#555555 */
+	background-color: whitesmoke;
+	font-family: 'Source Sans Pro', sans-serif;
+	text-align: center;
+}
+
+h1 {
+	font-weight: 600;
+	font-style: italic;
+}
+
+p {
+	opacity: 0.5;
+}
+
+main {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	padding: 1em;
+	cursor: pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+	<main>
+		<h1>Test Payments</h1>
+		<button onclick="handlePurchase()">Make a purchase</button>
+		<button onclick="handleSubscription()">Start a subscription</button>
+
+		<script type="text/javascript">
+			function handlePurchase() {
+				fetch('/api/wrux/payments/purchase', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						amount: 999,
+						currency: 'usd',
+						productName: 'Shazam',
+						quantity: 1,
+						successUrl: 'http://localhost:3102/',
+						cancelUrl: 'http://localhost:3102/test-payments.html'
+					})
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log('Success:', data);
+					window.location.href = data.url;
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+					alert('Purchase failed.');
+				});
+			}
+
+			function handleSubscription() {
+				fetch('/api/wrux/payments/subscription', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						quantity: 1,
+						successUrl: 'http://localhost:3102/',
+						cancelUrl: 'http://localhost:3102/test-payments.html'
+					})
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log('Success:', data);
+						window.location.href = data.url;
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+						alert('Purchase failed.');
+					});
+			}
+		</script>
+	</main>
+
+</body>
+</html>
