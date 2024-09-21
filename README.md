@@ -136,7 +136,7 @@ http://localhost:3102/test-payments.html
     quantity = 1,
     successUrl = '[ORIGIN]/success',
     cancelUrl = '[ORIGIN]/cancel'
-  }`
+  }
 	```
 
 - `POST /api/[app]/people/[token]/payments/purchase-credits`: Buy credits (price and currency set in `app` table):
@@ -145,7 +145,7 @@ http://localhost:3102/test-payments.html
 	{
     quantity = 10, // Nr of credits to purchase
     // You can use same props as with /payments/purchase but not needed
-  }`
+  }
 	```
 
 - `POST /api/[app]/people/[token]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe):

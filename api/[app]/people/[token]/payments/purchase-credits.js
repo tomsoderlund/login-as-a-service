@@ -39,7 +39,7 @@ export default async function handler (req, res) {
               unit_amount: req.body?.amount ?? app.credits_price ?? 100, // Amount in cents ($1.00)
               currency: req.body?.currency ?? app.currency ?? 'usd'
             },
-            quantity: req.body?.quantity ?? 1
+            quantity: req.body?.quantity ?? 10
           }
         ])
         res.status(200).json({ url: session.url })
