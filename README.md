@@ -148,7 +148,7 @@ http://localhost:3102/test-payments.html
   }
 	```
 
-- `POST /api/[app]/people/[token]/payments/use-credits`: Use/consume credits: `{ quantity: 10 }`
+- `POST /api/[app]/people/[token]/payments/use-credits`: Use/consume credits: `{ quantity: 1 }`
 - `POST /api/[app]/people/[token]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe):
 
 	```

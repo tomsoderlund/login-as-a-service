@@ -31,7 +31,7 @@ export default async function handler (req, res) {
         res.status(200).end()
       } else if (req.method === 'POST') {
         const [personApp] = await sql.sqlFind(pool, 'person_app', { user_id })
-        const creditsUsed = parseInt(req.body.quantity)
+        const creditsUsed = parseInt(req.body.quantity ?? 1)
         if (creditsUsed < 0) throw new Error('Can’t use a negative amount of credits:400')
         const newCreditsAmount = (personApp?.credits ?? 0) - creditsUsed
         if (newCreditsAmount < 0) throw new Error('Not enough credits:400')
