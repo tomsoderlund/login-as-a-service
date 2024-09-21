@@ -86,6 +86,7 @@ button {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
+						priceId: 'price_1J...', // Replace with your own Stripe price ID
 						quantity: 1,
 						successUrl: 'http://localhost:3102/',
 						cancelUrl: 'http://localhost:3102/test-payments.html'
