@@ -30,7 +30,7 @@ export default async function handler (req, res) {
         setAccessControlHeaders(res)
         res.status(200).end()
       } else if (req.method === 'POST') {
-        const session = await createStripeSession('subscription', req, [
+        const session = await createStripeSession('subscription', undefined, req, [
           {
             price: req.body?.priceId,
             quantity: req.body?.quantity ?? 1 // Nr of subscriptions/“seats”

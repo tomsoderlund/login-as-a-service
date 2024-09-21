@@ -10,6 +10,9 @@ CREATE TABLE app (
   secret character varying(32) DEFAULT md5(random()::text) UNIQUE,
   email_api_key character varying(50),
   email_api_server character varying(50)
+  -- Stripe payments: credits
+  credits_price integer,
+  currency character varying(3)
 );
 
 -- Table Definition ----------------------------------------------
@@ -39,5 +42,5 @@ CREATE TABLE person_app (
   -- Stripe payments
   purchase_session_id character varying(80),
   subscription_session_id character varying(80),
-  purchase_credits integer
+  credits integer
 );

@@ -30,14 +30,14 @@ export default async function handler (req, res) {
         setAccessControlHeaders(res)
         res.status(200).end()
       } else if (req.method === 'POST') {
-        const session = await createStripeSession('payment', undefined, req, [
+        const session = await createStripeSession('payment', 'credits', req, [
           {
             price_data: {
               product_data: {
-                name: req.body?.productName ?? 'Product'
+                name: req.body?.productName ?? `${app.name ?? app.slug} Credits`
               },
-              unit_amount: req.body?.amount ?? 500, // Amount in cents ($5.00)
-              currency: req.body?.currency ?? 'usd'
+              unit_amount: req.body?.amount ?? app.credits_price ?? 100, // Amount in cents ($1.00)
+              currency: req.body?.currency ?? app.currency ?? 'usd'
             },
             quantity: req.body?.quantity ?? 1
           }
