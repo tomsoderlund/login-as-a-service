@@ -51,12 +51,21 @@ button {
 		<h1>Test Payments</h1>
 		<button onclick="handlePurchase()">Make a purchase</button>
 		<button onclick="handleSubscription()">Start a subscription</button>
+		<button onclick="afterStripe()">afterStripe</button>
 
 		<script type="text/javascript">
+			const apiRoot = 'http://localhost:3102'
+			const appSlug = 'parlando'
 			const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjAzZjUwNjVjMzAyZDhkYjk2ZjEwODg0NWJmMzE5NWYiLCJpYXQiOjE3MjY5MzA0ODl9.sTGncrQc5B4aFnpmtwvCdPUQgtUIypLGoYWh3_387hQ'
 
+			function afterStripe() {
+				const successUrl = `${apiRoot}/test-payments.html?result=success'`
+				const afterStripeUrl = `${apiRoot}/api/${appSlug}/people/${userToken}/payments/afterStripe?sessionId=CHECKOUT_SESSION_ID&redirect=${encodeURIComponent(successUrl)}`
+				window.location.href = afterStripeUrl
+			}
+
 			function handlePurchase() {
-				fetch(`/api/parlando/people/${userToken}/payments/purchase`, {
+				fetch(`${apiRoot}/api/${appSlug}/people/${userToken}/payments/purchase`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -66,8 +75,8 @@ button {
 						currency: 'usd',
 						productName: 'Shazam',
 						quantity: 1,
-						successUrl: 'http://localhost:3102/',
-						cancelUrl: 'http://localhost:3102/test-payments.html'
+						successUrl: 'http://localhost:3102/test-payments.html?result=success',
+						cancelUrl: 'http://localhost:3102/test-payments.html?result=cancel'
 					})
 				})
 				.then(response => response.json())
@@ -82,7 +91,7 @@ button {
 			}
 
 			function handleSubscription() {
-				fetch(`/api/parlando/people/${userToken}/payments/subscription`, {
+				fetch(`${apiRoot}//api/${appSlug}/people/${userToken}/payments/subscription`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -90,8 +99,8 @@ button {
 					body: JSON.stringify({
 						priceId: 'price_1J...', // Replace with your own Stripe price ID
 						quantity: 1,
-						successUrl: 'http://localhost:3102/',
-						cancelUrl: 'http://localhost:3102/test-payments.html'
+						successUrl: 'http://localhost:3102/test-payments.html?result=success',
+						cancelUrl: 'http://localhost:3102/test-payments.html?result=cancel'
 					})
 				})
 					.then(response => response.json())
