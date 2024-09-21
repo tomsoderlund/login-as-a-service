@@ -104,6 +104,7 @@ JSON fields:
 
 - `GET /api/[app]/people/[token]`: get user info from a JWT token:
 
+    ```
     {
       "user_id_numeric": 123,
       "user_id": "e93fc8605c0940a0af6ce0fdb22f2e5c",
@@ -116,6 +117,7 @@ JSON fields:
       "subscribe_email": true,
       "subscribe_sms": true
     }
+    ```
 
 - `GET /api/apps/[app-secret]/people`: get user list with email address.
 - `GET /api/stats`: see user count etc for every app.
@@ -124,13 +126,21 @@ JSON fields:
 
 http://localhost:3102/test-payments.html
 
-- `POST /api/[app]/payments/purchase`: Create a one-time purchase: `{ amount = 500, currency = 'usd', productName = 'Product', quantity = 1, successUrl = '[ORIGIN]/success', cancelUrl = '[ORIGIN]/cancel' }`
-- `POST /api/[app]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe): `{ priceId, quantity = 1 }`
+- `POST /api/[app]/people/[token]/payments/purchase`: Create a one-time purchase:
 
+	```
+	{ amount = 500, currency = 'usd', productName = 'Product', quantity = 1, successUrl = '[ORIGIN]/success', cancelUrl = '[ORIGIN]/cancel' }`
+	```
+
+- `POST /api/[app]/people/[token]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe):
+
+	```
+	{ priceId, quantity = 1 }
+	```
 
 ## Todo
 
-- [ ] Support multiple apps per user
+- [ ] Support multiple apps per user in shared metadata
 - [ ] 🐜 duplicate key value violates unique constraint \"app_username_unique_idx\"
 - [ ] Subscriptions
   - [ ] Send email/SMS to all subscribers
