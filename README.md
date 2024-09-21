@@ -130,12 +130,12 @@ http://localhost:3102/test-payments.html
 
 	```
 	{
-    amount = 500,
-    currency = 'usd',
-    productName = 'Product',
-    quantity = 1,
-    successUrl = '[ORIGIN]/success',
-    cancelUrl = '[ORIGIN]/cancel'
+    amount: 500,
+    currency: 'usd',
+    productName: 'Product',
+    quantity: 1,
+    successUrl: '[ORIGIN]/success',
+    cancelUrl: '[ORIGIN]/cancel'
   }
 	```
 
@@ -143,11 +143,12 @@ http://localhost:3102/test-payments.html
 
 	```
 	{
-    quantity = 10, // Nr of credits to purchase
+    quantity: 10, // Nr of credits to purchase
     // You can use same props as with /payments/purchase but not needed
   }
 	```
 
+- `POST /api/[app]/people/[token]/payments/use-credits`: Use/consume credits: `{ quantity: 10 }`
 - `POST /api/[app]/people/[token]/payments/subscription`: Create a recurring subscription (`priceId` is from Stripe):
 
 	```

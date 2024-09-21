@@ -23,10 +23,11 @@ export default async function handler (req, res) {
       if (req.method === 'GET') {
         // req.query = { mode: 'payment', sessionId: 'cs_test_a1b2c3d4e5f6g7h8i9j0k1l2', redirect: 'https://example.com/success' }
         const [personApp] = await sql.sqlFind(pool, 'person_app', { user_id })
+        const newCreditsAmount = (personApp?.credits ?? 0) + parseInt(req.query.credits)
         await sql.sqlUpdate(pool, 'person_app', { user_id }, {
           ...(req.query.mode === 'payment' && { purchase_session_id: req.query.sessionId }),
           ...(req.query.mode === 'subscription' && { subscription_session_id: req.query.sessionId }),
-          ...(req.query.subMode === 'credits' && { credits: (personApp?.credits ?? 0) + parseInt(req.query.credits) })
+          ...(req.query.subMode === 'credits' && { credits: newCreditsAmount })
         })
         const decodedRedirect = decodeURIComponent(req.query.redirect)
         res.redirect(302, decodedRedirect)

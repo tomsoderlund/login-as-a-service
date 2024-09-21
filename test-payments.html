@@ -51,6 +51,7 @@ button {
 		<h1>Test Payments</h1>
 		<button onclick="handlePurchase()">Make a purchase</button>
 		<button onclick="handleCreditsPurchase()">Make a credits purchase</button>
+		<button onclick="handleCreditsUse()">Use credits</button>
 		<button onclick="handleSubscription()">Start a subscription</button>
 		<button onclick="afterStripe()">afterStripe</button>
 
@@ -87,7 +88,7 @@ button {
 				})
 				.catch((error) => {
 					console.error('Error:', error);
-					alert('Purchase failed.');
+					alert('Purchase failed: ' + error.message);
 				});
 			}
 
@@ -111,7 +112,28 @@ button {
 					})
 					.catch((error) => {
 						console.error('Error:', error);
-						alert('Purchase failed.');
+						alert('Purchase failed: ' + error.message);
+					});
+			}
+
+			function handleCreditsUse(appSlugForCredits = appSlug) {
+				const creditsToPurchase = window.prompt('How many credits would you like to use?', '1');
+				fetch(`${apiRoot}/api/${appSlugForCredits}/people/${userToken}/payments/use-credits`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						quantity: creditsToPurchase
+					})
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log('Success:', data);
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+						alert('Purchase failed: ' + error.message);
 					});
 			}
 
@@ -135,7 +157,7 @@ button {
 					})
 					.catch((error) => {
 						console.error('Error:', error);
-						alert('Purchase failed.');
+						alert('Purchase failed: ' + error.message);
 					});
 			}
 		</script>
