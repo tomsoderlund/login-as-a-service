@@ -54,7 +54,7 @@ button {
 
 		<script type="text/javascript">
 			function handlePurchase() {
-				fetch('/api/wrux/payments/purchase', {
+				fetch('/api/parlando/people/TOKEN/payments/purchase', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ button {
 			}
 
 			function handleSubscription() {
-				fetch('/api/wrux/payments/subscription', {
+				fetch('/api/parlando/people/TOKEN/payments/subscription', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
