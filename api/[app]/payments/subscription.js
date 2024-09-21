@@ -10,6 +10,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-
  * @throws {Error} - Throws an error if the Stripe session creation fails.
  */
 export default async function handler (req, res) {
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'POST')
+    res.status(200).end()
+    return
+  }
   if (req.method === 'POST') {
     try {
       const origin = req.headers.origin
