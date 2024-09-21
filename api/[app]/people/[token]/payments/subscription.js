@@ -1,6 +1,9 @@
-import Stripe from 'stripe'
+import jwt from 'jsonwebtoken'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' })
+import { handleRestAction, setAccessControlHeaders } from '../../../../../lib/handleRestAction'
+import { runDatabaseFunction } from '../../../../../lib/database'
+import { createStripeSession } from '../../../../../lib/stripe'
+const { getAppBySlug } = require('../../../../../lib/data/apps')
 
 /**
  * Handles the creation of a Stripe subscription.
@@ -10,41 +13,31 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-
  * @throws {Error} - Throws an error if the Stripe session creation fails.
  */
 export default async function handler (req, res) {
-  if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Access-Control-Allow-Methods', 'POST')
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-    res.status(200).end()
-    return
-  }
-  if (req.method === 'POST') {
-    try {
-      const origin = req.headers.origin
-      const successUrl = req.body?.successUrl ?? `${origin}/success`
-      const cancelUrl = req.body?.cancelUrl ?? `${origin}/cancel`
+  await handleRestAction(async () => {
+    // General for all methods
+    if (!['OPTIONS', 'POST'].includes(req.method)) throw new Error(`${req.method} method not allowed:405`)
 
-      const session = await stripe.checkout.sessions.create({
-        mode: 'subscription',
-        payment_method_types: ['card', 'link'],
-        line_items: [
+    await runDatabaseFunction(async (pool) => {
+      // App
+      const app = await getAppBySlug(pool, req.query.app)
+      if (!app) throw new Error(`App '${req.query.app}' not found:404`)
+      // User ID
+      const { user_id } = await jwt.verify(req.query.token, app.secret) // eslint-disable-line camelcase
+      if (!user_id) throw new Error('Invalid login token:401') // eslint-disable-line camelcase
+
+      // For each method
+      if (req.method === 'OPTIONS') {
+        setAccessControlHeaders(res)
+        res.status(200).end()
+      } else if (req.method === 'POST') {
+        const session = await createStripeSession('subscription', req.headers.origin, req.body, [
           {
             price: req.body?.priceId,
             quantity: req.body?.quantity ?? 1 // Nr of subscriptions/“seats”
           }
-        ],
-        success_url: `${successUrl}?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: cancelUrl
-      })
-
-      res.setHeader('Access-Control-Allow-Origin', '*')
-      res.status(200).json({ url: session.url })
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Internal server error'
-      res.status(500).json({ statusCode: 500, message: errorMessage })
-    }
-  } else {
-    res.setHeader('Allow', 'POST')
-    res.status(405).end('Method Not Allowed')
-  }
+        ])
+        res.status(200).json({ url: session.url })
+      }
+    })
+  }, undefined, res)
 }

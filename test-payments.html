@@ -53,8 +53,10 @@ button {
 		<button onclick="handleSubscription()">Start a subscription</button>
 
 		<script type="text/javascript">
+			const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjAzZjUwNjVjMzAyZDhkYjk2ZjEwODg0NWJmMzE5NWYiLCJpYXQiOjE3MjY5MzA0ODl9.sTGncrQc5B4aFnpmtwvCdPUQgtUIypLGoYWh3_387hQ'
+
 			function handlePurchase() {
-				fetch('/api/parlando/people/TOKEN/payments/purchase', {
+				fetch(`/api/parlando/people/${userToken}/payments/purchase`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -80,7 +82,7 @@ button {
 			}
 
 			function handleSubscription() {
-				fetch('/api/parlando/people/TOKEN/payments/subscription', {
+				fetch(`/api/parlando/people/${userToken}/payments/subscription`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
