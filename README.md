@@ -162,7 +162,6 @@ http://localhost:3102/test-payments.html
 ## Todo
 
 - [ ] Support multiple apps per user in shared metadata
-- [ ] 🐜 duplicate key value violates unique constraint \"app_username_unique_idx\"
 - [ ] Subscriptions
   - [ ] Send email/SMS to all subscribers
   - [ ] Subscribed (field in person_app)
@@ -183,6 +182,7 @@ invalid signature = JWT error
 
 Done:
 
+- [x] 🐜 duplicate key value violates unique constraint "app_username_unique_idx" (same username & same app_id)
 - [x] Fallback email account when not specified on app level
 - [x] Inverted flow (`signup-direct`): sign up, email if NOT user
 - [x] 🐜 Email force lowercase
