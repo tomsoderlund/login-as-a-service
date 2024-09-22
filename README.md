@@ -7,6 +7,7 @@ _Simple plug-and-play login/signup/leads service (using email), compatible with 
 - Sign up/Login via “magic link” email (no password)
   - Also “signup-direct” mode with quick signup without email verification
 - Lead collection
+- Payments with Stripe Link: one-time purchases, credits, and subscriptions
 - Invites (coming)
 - SMS support (coming)
 

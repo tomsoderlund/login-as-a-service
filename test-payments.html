@@ -37,6 +37,10 @@ main {
 	align-items: center;
 }
 
+main > * {
+	margin: 0.5em 0;
+}
+
 button {
 	padding: 1em;
 	cursor: pointer;
@@ -49,9 +53,11 @@ button {
 
 	<main>
 		<h1>Test Payments</h1>
-		<button onclick="handlePurchase()">Make a purchase</button>
-		<button onclick="handleCreditsPurchase()">Make a credits purchase</button>
-		<button onclick="handleCreditsUse()">Use credits</button>
+		<button onclick="handlePurchase()">Make a single purchase</button>
+		<section>
+			<button onclick="handleCreditsPurchase()">Make a credits purchase</button>
+			<button onclick="handleCreditsUse()">Use credits</button>
+		</section>
 		<button onclick="handleSubscription()">Start a subscription</button>
 		<button onclick="afterStripe()">afterStripe</button>
 
@@ -138,7 +144,7 @@ button {
 			}
 
 			function handleSubscription() {
-				fetch(`${apiRoot}//api/${appSlug}/people/${userToken}/payments/subscription`, {
+				fetch(`${apiRoot}/api/${appSlug}/people/${userToken}/payments/subscription`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
