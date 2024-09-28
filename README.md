@@ -34,8 +34,9 @@ A React Hook implementing steps 1 (`loginUser`):
       const [user, setUser] = useState()
 
       useEffect(() => {
-        const user = window.localStorage.getItem(COOKIE_NAME) ? JSON.parse(getCookie(COOKIE_NAME)) : undefined
-        console.log(`User:`, user)
+        const userObject = window.localStorage.getItem(STORAGE_USER_KEY)
+        const user = (userObject !== null) ? JSON.parse(userObject) : undefined
+        console.log('User:', user)
         setUser(user)
       }, [])
 
@@ -66,7 +67,7 @@ A React Hook implementing steps 1 (`loginUser`):
         const { username } = person
         if (!username) throw new Error(`Could not log in user – user token is invalid`)
         const userObj = { username, token }
-        if (isClientSide()) window.localStorage.setItem(COOKIE_NAME, JSON.stringify(userObj))
+        if (isClientSide()) window.localStorage.setItem(STORAGE_USER_KEY, JSON.stringify(userObj))
         return person
       }
 
