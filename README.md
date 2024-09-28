@@ -28,13 +28,13 @@ _Simple plug-and-play login/signup/leads service (using email), compatible with 
 
 ### Example client-side code
 
-A React Hook implementing steps 1 (`loginUser`) and 3-4 (`authenticateUser`):
+A React Hook implementing steps 1 (`loginUser`):
 
     export const useUser = function () {
       const [user, setUser] = useState()
 
       useEffect(() => {
-        const user = getCookie(COOKIE_NAME) ? JSON.parse(getCookie(COOKIE_NAME)) : undefined
+        const user = window.localStorage.getItem(COOKIE_NAME) ? JSON.parse(getCookie(COOKIE_NAME)) : undefined
         console.log(`User:`, user)
         setUser(user)
       }, [])
@@ -58,13 +58,15 @@ A React Hook implementing steps 1 (`loginUser`) and 3-4 (`authenticateUser`):
         }
       }
 
+...and steps 3-4:
+
       const authenticateUser = async (token) => {
         if (!token) return
         const person = await fetch(`${config.loginService}/people/${token}`).then(res => res.json())
         const { username } = person
         if (!username) throw new Error(`Could not log in user – user token is invalid`)
         const userObj = { username, token }
-        if (isClientSide()) setCookie(COOKIE_NAME, userObj)
+        if (isClientSide()) window.localStorage.setItem(COOKIE_NAME, JSON.stringify(userObj))
         return person
       }
 
