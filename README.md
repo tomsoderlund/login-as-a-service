@@ -19,7 +19,7 @@ _Simple plug-and-play login/signup/leads service (using email), compatible with 
 2. Set up Mailgun for email (see below). Place Mailgun values for domain, API key, (server) in database `app` or as global fallback values `DEFAULT_EMAIL_*`.
 3. Create a client-side login/signup form in your app code.
 
-### How to log in (or signup) a user
+### How to log in (or signup) a user (Person)
 
 1. ➡️ Submit `POST /api/[app]/login` (or `lead`/`signup`/`signup-direct` – see “Login/Signup/Lead” below), with body of at least `{ email }`.
 2. 📧 An email is sent to the user, when link is clicked they are forwarded to `redirect_url` page with query `?token=` (a JWT token with `person_app.user_id` encrypted).
