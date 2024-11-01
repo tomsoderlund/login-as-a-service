@@ -206,3 +206,139 @@ Done:
 - [x] POST /api/[app]/signup
 - [x] Boolean “can_login” (lead: false, login/signup: true)
 - [x] Update user: PATCH /api/[app]/people/[token]: Update user
+
+## Feedback form – an example
+
+    import React, { useState, useEffect } from 'react'
+
+    import { config } from 'config/config'
+    import { useUser } from 'hooks/useUser'
+
+    const FeedbackForm = () => {
+      const { user } = useUser()
+      const [personInfo, setPersonInfo] = useState({ email: '', feedback: '' })
+      const setPersonInfoField = (field, value) => setPersonInfo({ ...personInfo, [field]: value })
+
+      useEffect(() => {
+        if (user?.email) {
+          setPersonInfoField('email', user.email)
+        }
+      }, [user])
+
+      const [showFeedback, setShowFeedback] = useState(false)
+      const [inProgress, setInProgress] = useState(false)
+      const [isSubmitted, setIsSubmitted] = useState(false)
+      const [hasErrors, setHasErrors] = useState(false)
+
+      const handleSubmit = async (event) => {
+        event.preventDefault()
+        setInProgress(true)
+        try {
+          // Should use the 'lead' mode in leadService
+          const result = await fetch(config.leadService, { // eslint-disable-line no-undef
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(personInfo)
+          })
+          if (result.status === 200) {
+            setIsSubmitted(true)
+          } else {
+            const json = await result.json()
+            setHasErrors(json.message)
+          }
+        } catch (err) {
+          console.warn(`Warning: ${err.message || err}`)
+          setHasErrors(err.message)
+        } finally {
+          setInProgress(false)
+        }
+      }
+
+      return (
+        <>
+          <button title='Leave feedback' onClick={() => { setShowFeedback(!showFeedback); setIsSubmitted(false) }} className='circle-menu-button bottom right grow-once'><img src='/icons/feedback.svg' alt='Feedback' /></button>
+
+          {showFeedback ? (
+            <form onSubmit={handleSubmit}>
+              <button onClick={() => setShowFeedback(false)} className='no-button close-button'>✖️</button>
+              {!isSubmitted ? (
+                <>
+                  <label>Leave feedback:</label>
+                  <input
+                    required
+                    name='email'
+                    type='email'
+                    value={personInfo.email}
+                    placeholder='Your email'
+                    onChange={event => setPersonInfoField('email', event.target.value)}
+                    disabled={inProgress}
+                  />
+                  <textarea
+                    required
+                    name='feedback'
+                    value={personInfo.feedback}
+                    placeholder='Your feedback'
+                    onChange={event => setPersonInfoField('feedback', event.target.value)}
+                    disabled={inProgress}
+                    rows={5}
+                  />
+                  <button
+                    type='submit'
+                    className={'primary progress-animation' + (inProgress ? ' in-progress' : '')}
+                    disabled={inProgress}
+                  >
+                    Send
+                  </button>
+                  {hasErrors ? <p className='error color-error-fg'>{hasErrors}</p> : null}
+                </>
+              ) : (
+                <p className='thankyou'>Thank you for your feedback!</p>
+              )}
+              <style jsx>{`
+                form {
+                  position: fixed;
+                  bottom: 1.5rem;
+                  right: 3.5rem;
+                  padding: 1em;
+                  background-color: #F5F5F5;
+                  box-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+                  border-radius: 0.5em;
+                  display: flex;
+                  flex-direction: column;
+                  font-size: 1rem;
+                }
+
+                .close-button {
+                  position: absolute;
+                  top: 0.2rem;
+                  right: 0.2rem;
+                  font-size: 1.2rem;
+                }
+
+                label {
+                  margin-bottom: 0.5em;
+                }
+
+                input:not([type="radio"]):not([type="checkbox"]):not([type="color"]):not([type="range"]), .input, textarea, select {
+                  margin-right: 0;
+                  padding: 0.5em;
+                }
+
+                @media only screen and (max-width: 480px) {
+                  form {
+                    right: 0.5rem;
+                    left: 0.5rem;
+                    bottom: 4rem;
+                  }
+                }
+              `}
+              </style>
+            </form>
+          ) : null}
+        </>
+      )
+    }
+    export default FeedbackForm
