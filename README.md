@@ -102,6 +102,7 @@ JSON fields:
 - `firstName`
 - `lastName`
 - `country` (code)
+- `feedback` (user feedback, e.g. a comment box)
 - `...metadata` for everything else
 
 ### Get user info and statistics
@@ -124,6 +125,7 @@ JSON fields:
     ```
 
 - `GET /api/apps/[app-secret]/people`: get user list with email address.
+- `GET /api/apps/[app-secret]/feedback`: get list of user feedback.
 - `GET /api/stats`: see user count etc for every app.
 
 ### Payments with Stripe
