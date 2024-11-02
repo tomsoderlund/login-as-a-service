@@ -102,7 +102,7 @@ JSON fields:
 - `firstName`
 - `lastName`
 - `country` (code)
-- `feedback` (user feedback, e.g. a comment box)
+- `message` (user feedback, e.g. a comment box)
 - `...metadata` for everything else
 
 ### Get user info and statistics
@@ -216,7 +216,7 @@ Done:
 
     const FeedbackForm = () => {
       const { user } = useUser()
-      const [personInfo, setPersonInfo] = useState({ email: '', feedback: '' })
+      const [personInfo, setPersonInfo] = useState({ email: '', message: '' })
       const setPersonInfoField = (field, value) => setPersonInfo({ ...personInfo, [field]: value })
 
       useEffect(() => {
@@ -278,10 +278,10 @@ Done:
                   />
                   <textarea
                     required
-                    name='feedback'
-                    value={personInfo.feedback}
+                    name='message'
+                    value={personInfo.message}
                     placeholder='Your feedback'
-                    onChange={event => setPersonInfoField('feedback', event.target.value)}
+                    onChange={event => setPersonInfoField('message', event.target.value)}
                     disabled={inProgress}
                     rows={5}
                   />
