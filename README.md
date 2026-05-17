@@ -83,7 +83,7 @@ https://app.mailgun.com/app/sending/domains/mg.MYDOMAIN.com
 
 ## How to Start
 
-    yarn dev
+    npm run dev
 
 
 ## API

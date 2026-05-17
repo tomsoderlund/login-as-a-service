@@ -5,10 +5,10 @@
   "author": "Tom Söderlund",
   "license": "MIT",
   "scripts": {
-    "dev": "yarn vercel",
+    "dev": "npm run vercel",
     "vercel": "vercel dev --listen 3102",
     "deploy": "vercel --prod",
-    "test": "echo 'Running Standard.js and Jasmine unit tests...\n' && yarn lint && yarn unit",
+    "test": "echo 'Running Standard.js and Jasmine unit tests...\n' && npm run lint && npm run unit",
     "lint": "standard",
     "fix": "standard --fix",
     "unit": "jasmine"
